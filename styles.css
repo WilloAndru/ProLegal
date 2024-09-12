@@ -10,6 +10,7 @@ body {
   background-color: aliceblue;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 80px;
   padding-top: 180px;
 }
@@ -20,9 +21,16 @@ body {
   font-weight: bold;
   padding: 10px 20px;
   background-color: lightblue;
+  text-decoration: none;
 }
 .stylesDiv:hover {
   background-color: lightskyblue;
+}
+
+input {
+  border-radius: 5px;
+  padding: 5px;
+  border: none;
 }
 
 header {
@@ -91,4 +99,19 @@ footer {
   padding: 30px 10vw;
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+form {
+  background-color: lightskyblue;
+  height: 50vh;
+  width: 50vw;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
 }
