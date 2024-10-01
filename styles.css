@@ -23,6 +23,7 @@ body {
   background-color: lightblue;
   text-decoration: none;
 }
+
 .stylesDiv:hover {
   background-color: lightskyblue;
 }
@@ -80,7 +81,7 @@ section {
 #sec3 {
   gap: 20px;
   flex-direction: column;
-  
+
   div {
     width: 100%;
     display: flex;
@@ -90,6 +91,11 @@ section {
     button {
       width: 19vw;
       height: 160px;
+
+      img {
+        padding-bottom: 10px;
+        width: 40px;
+      }
     }
   }
 }
@@ -100,18 +106,48 @@ footer {
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 30px;
+
+  .div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .div1 {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background-color: lightskyblue;
+      border-radius: 10px;
+      padding: 15px 20px;
+
+      img {
+        width: 50px;
+      }
+    }
+  }
 }
 
 form {
   background-color: lightskyblue;
-  height: 50vh;
-  width: 50vw;
   border-radius: 15px;
-  padding: 10px 20px;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  padding: 40px;
+}
+
+.divClasico {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lightskyblue;
+  border-radius: 15px;
+  gap: 20px;
+  padding: 20px;
+
 }
