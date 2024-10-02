@@ -112,9 +112,12 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 5px;
-
+    align-items: center;
+    
     .div1 {
+      width: 70vw;
       display: flex;
+      text-align: start;
       align-items: center;
       gap: 20px;
       background-color: lightskyblue;
@@ -150,4 +153,36 @@ form {
   gap: 20px;
   padding: 20px;
 
+}
+
+#secAdmin {
+  width: 80vw;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  a {
+    width: 48%;
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+
+    button {
+      background-color: transparent;
+      border: none;
+
+      img {
+        width: 80px;
+        margin-bottom: 15px;
+      }
+    }
+
+  }
+}
+
+.divAviso {
+  margin-top: 10vh;
+  img {
+    margin-top: 50px;
+    width: 200px;
+  }
 }
