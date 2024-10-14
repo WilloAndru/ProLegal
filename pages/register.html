@@ -3,36 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProLegal Solutions</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="images/justicia.png" type="image/x-icon">
+  <title>ProLegal Solution</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/images/justicia.png" type="image/x-icon">
 </head>
 
 <body>
-  <header>
-    <div>
-      <a href="/index.html">
-        <img src="images/justicia.png" alt="Justicia">
-      </a>
-      <h1>Registro</h1>
-    </div>
+
+  <header class='header'>
+    <a title="Home" href="/index.html">
+      <img class="icon" src="/images/casa.png">
+    </a>
+    <a title="Perfil" href="/pages/login.html">
+      <img class="icon" src="/images/perfil.png">
+    </a>
+    <a title="Solicitud" href="/pages/login.html">
+      <img class="icon" src="/images/mensaje.png">
+    </a>
   </header>
 
-  <div>
-    <form action="procesar_login.php" method="post">
-      <label for="username">Usuario:</label>
+  <div class="login body">
+    <form>
+      <div>
+        <img class="icon" src="/images/mensaje.png">
+        <h4>Registro</h4>
+      </div>
+      <label for="username">Usuario</label>
       <input type="text" id="username" name="username" required>
-      <label for="password">Contraseña:</label>
+      <label for="date">Fecha de nacimiento</label>
+      <input type="date" id="date" name="date" required>
+      <label for="password">Contraseña</label>
       <input type="password" id="password" name="password" required>
-      <label for="password">Confimar contraseña:</label>
+      <label for="password">Confimar contraseña</label>
       <input type="password" id="password" name="password" required>
       <button class="stylesDiv" type="submit">Entrar</button>
     </form>
-    <div class="divClasico">
+    <div class="div2">
       <h5>¿Ya tienes una cuenta?</h5>
-      <a href="/login.html"><button class="stylesDiv">Inicia sesion aqui</button></a>
+      <a href="/pages/login.html"><button class="stylesDiv">Inicia sesion aqui</button></a>
     </div>
   </div>
+  
 </body>
 
 </html>
