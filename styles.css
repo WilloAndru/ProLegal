@@ -30,6 +30,7 @@ button {
   background-color: darkslategray;
   color: white;
   font-weight: bold;
+  border: 1px solid darkcyan;
 }
 button:hover {
   background-color: darkcyan;
@@ -283,5 +284,32 @@ footer {
     display: flex;
     flex-direction: column;
     gap: .5rem;
+  }
+}
+
+.admin {
+  
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+    background-color: darkcyan;
+  }
+  
+  section {
+    padding: 5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    
+    button {
+      background-color: white;
+      height: 20rem;
+      width: 25vw;
+    }
+    button:hover {
+      background-color: whitesmoke;
+    }
   }
 }
