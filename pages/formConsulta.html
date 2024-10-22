@@ -5,38 +5,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ProLegal Solution</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="images/justicia.png" type="image/x-icon">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/images/justicia.png" type="image/x-icon">
 </head>
 
 <body>
-  <header>
-    <div>
-      <a href="/index.html">
-        <img src="images/justicia.png" alt="Justicia">
-      </a>
-      <h1>Formulario Consulta</h1>
-    </div>
+
+  <header class='header'>
+    <a title="Home" href="/index.html">
+      <img class="icon" src="/images/casa.png">
+    </a>
+    <a title="Perfil" href="/pages/login.html">
+      <img class="icon" src="/images/perfil.png">
+    </a>
+    <a title="Solicitud" href="/pages/login.html">
+      <img class="icon" src="/images/mensaje.png">
+    </a>
   </header>
 
-  <form class="form2" action="">
-    <div>
-      <label for="">Nombre</label>
-      <input type="text">
-      <label for="">Edad</label>
-      <input type="number">
-      <label for="">Numero de identificacion</label>
-      <input type="text">
-    </div>
-    <div>
-      <label for="">Telefono de contacto</label>
-      <input type="text">
-      <label for="">Correo electronico</label>
-      <input type="text">
+  <form class="body form" action="">
+
+    <div class="div">
+      <h4>Usted ha escojido la asesoria de tipo penal</h4>
+      <p>Porfavor llene el metodo de pago y la descripcion de su caso</p>
+
       <label for="">Descripcion breve de la consulta</label>
       <textarea name="" id=""></textarea>
+
+      <div class="div1">
+          <label>Informacion de la tarjeta</label>
+          <input name="cardNumber" className='Input input1' type="text" placeholder='1234 1234 1234 1234' />
+          <input name="expiryDate" type="text" placeholder='MM/AA' />
+          <input name="cvv" className='input2' type="text" placeholder='CVV' />
+          <input name="cardHolderName" className='Input' type="text" placeholder='Nombre completo' />
+      </div>
+
+      <label>Costo consulta inicial</label>
+      <h4>80.000 COP</h4>
+
       <a class="stylesDiv" href="/index.html"><button>Enviar consulta</button></a>
     </div>
+
+    <footer>
+      <div>
+        <h3>La firma</h3>
+        <p>Presentación</p>
+        <p>Trabaje con nosotros</p>
+        <p>Abogados</p>
+      </div>
+      <div>
+        <h3>Redes Sociales</h3>
+        <p>YouTube</p>
+        <p>Instagram</p>
+        <p>Linkedln</p>
+      </div>
+      <div>
+        <h3>Informacion</h3>
+        <p>pls@prolegalsolution.com</p>
+        <p>+57 321 577 6599</p>
+        <p>Bogota, Colombia</p>
+      </div>
+    </footer>
+
   </form>
 
 </body>

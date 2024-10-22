@@ -260,3 +260,28 @@ footer {
     margin: 0 10vw;
   }
 }
+
+.form {  
+  .div {
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+
+    label {
+      margin-top: .5rem;
+    }
+
+    input, textarea {
+      border-radius: 1rem;
+      padding: .2rem .5rem;
+    }
+  }
+
+  .div1 {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+}
