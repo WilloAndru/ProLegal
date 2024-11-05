@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProLegal Solution</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="../images/justicia.png" type="image/x-icon">
+</head>
+
+<body>
+  <header class='header'>
+    <a title="Home" href="../index.html">
+      <img class="icon" src="../images/casa.png">
+    </a>
+    <a title="Perfil" href="perfil.html">
+      <img class="icon" src="../images/perfil.png">
+    </a>
+    <a title="Solicitud" href="formConsulta.html">
+      <img class="icon" src="../images/mensaje.png">
+    </a>
+  </header>
+
+  <div class="body">
+    <div class="perfil">
+      <div class="div">
+        <h4>Usuario:</h4>
+        <p id="usuario"></p>
+      </div>
+      <div class="div">
+        <h4>Identificación:</h4>
+        <p id="identificacion"></p>
+      </div>
+      <div class="div">
+        <h4>Fecha de nacimiento:</h4>
+        <p id="fecha-nacimiento"></p>
+      </div>
+      <div class="div">
+        <h4>Teléfono:</h4>
+        <p id="telefono"></p>
+      </div>
+      <div class="div" id="transacciones">
+        <h4>Transacciones:</h4>
+        <ul id="lista-transacciones"></ul>
+      </div>
+      <button onclick="logout()">Cerrar sesión</button>
+    </div>
+
+    <footer>
+      <div>
+        <h3>La firma</h3>
+        <p>Presentación</p>
+        <p>Trabaje con nosotros</p>
+        <p>Abogados</p>
+      </div>
+      <div>
+        <h3>Redes Sociales</h3>
+        <p>YouTube</p>
+        <p>Instagram</p>
+        <p>Linkedln</p>
+      </div>
+      <div>
+        <h3>Información</h3>
+        <p>pls@prolegalsolution.com</p>
+        <p>+57 321 577 6599</p>
+        <p>Bogotá, Colombia</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const username = localStorage.getItem('username');
+        const identificacion = localStorage.getItem('identificacion');
+        const telefono = localStorage.getItem('telefono');
+        const fechaNacimiento = localStorage.getItem('fechaNacimiento');
+        const userId = localStorage.getItem('userId');
+
+        document.getElementById('usuario').textContent = username;
+        document.getElementById('identificacion').textContent = identificacion;
+        document.getElementById('telefono').textContent = telefono;
+        document.getElementById('fecha-nacimiento').textContent = fechaNacimiento;
+
+        obtenerTransacciones(userId);
+      });
+
+      function obtenerTransacciones(userId) {
+        fetch(`../php/obtenerTransacciones.php?userId=${userId}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(transacciones => {
+            const listaTransacciones = document.getElementById('lista-transacciones');
+            listaTransacciones.innerHTML = '';
+
+            if (Array.isArray(transacciones) && transacciones.length > 0) {
+              transacciones.forEach(transaccion => {
+                const divTransaccion = document.createElement('div');
+                divTransaccion.classList.add('transaccion');
+
+                const descripcion = document.createElement('p');
+                descripcion.textContent = `Descripción: ${transaccion.descripcion}`;
+
+                const valor = document.createElement('p');
+                valor.textContent = `Valor: ${transaccion.valor}`;
+
+                const mensaje = document.createElement('p');
+                mensaje.textContent = `Mensaje asesor: ${transaccion.mensaje}`;
+
+                divTransaccion.appendChild(descripcion);
+                divTransaccion.appendChild(valor);
+                divTransaccion.appendChild(mensaje);
+
+                listaTransacciones.appendChild(divTransaccion);
+              });
+            } else {
+              listaTransacciones.innerHTML = '<p>No hay transacciones disponibles.</p>';
+            }
+          })
+          .catch(error => {
+            console.error('Error al obtener las transacciones:', error);
+            const listaTransacciones = document.getElementById('lista-transacciones');
+            listaTransacciones.innerHTML = '<p>Error al cargar transacciones.</p>';
+          });
+      }
+
+      function logout() {
+        localStorage.clear();
+        window.location.href = '../index.html';
+      }
+    </script>
+  </div>
+</body>
+
+</html>

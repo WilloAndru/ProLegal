@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2024 a las 00:29:19
+-- Tiempo de generación: 05-11-2024 a las 00:57:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,11 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `transactions` (
   `id` int(7) NOT NULL,
-  `idUserClient` int(7) NOT NULL,
-  `idUserAdvisor` int(7) NOT NULL,
-  `income` int(15) NOT NULL,
-  `type` int(1) NOT NULL
+  `idCliente` int(7) NOT NULL,
+  `valor` int(15) NOT NULL,
+  `tipo` int(1) NOT NULL,
+  `descripcion` varchar(1024) NOT NULL,
+  `mensaje` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `idCliente`, `valor`, `tipo`, `descripcion`, `mensaje`) VALUES
+(1, 4, 50000, 1, 'Me estrello un carro, y el usuario culpable no quiere responder...', 'conectemonos en este link: ...');
 
 -- --------------------------------------------------------
 
@@ -43,18 +51,23 @@ CREATE TABLE `transactions` (
 
 CREATE TABLE `users` (
   `id` int(7) NOT NULL,
-  `user` varchar(63) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `date` date NOT NULL,
-  `role` int(1) NOT NULL
+  `usuario` varchar(63) NOT NULL,
+  `identificacion` varchar(15) NOT NULL,
+  `contraseña` varchar(255) NOT NULL,
+  `fechaNacimiento` date NOT NULL,
+  `telefono` text NOT NULL,
+  `rol` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `user`, `password`, `date`, `role`) VALUES
-(1, 'WilsonAndres', 'Ean123', '2024-10-14', 0);
+INSERT INTO `users` (`id`, `usuario`, `identificacion`, `contraseña`, `fechaNacimiento`, `telefono`, `rol`) VALUES
+(1, 'Admin', '100000001', '$2y$10$IX7VfqMtIzO75yOpkKGvruo8Xxl0qkyNyCm4xXrZC9NZs91ZJYdiy', '0000-00-00', '0000000000', 1),
+(2, 'Sergio', '100000001', '$2y$10$v5chb.qSgcAe.9zjXONT9uvCUDjrFkf1p5dbD4K1.p7/p5TixOfLG', '2024-12-05', '3025177001', 2),
+(3, 'Camila', '1000000002', '$2y$10$J7leB1.O39MUkYFNjKJX7.9UwDFTHGUNy7w8.VVeH7pLePW.q.D5C', '2024-11-02', '30251779100', 2),
+(4, 'Wilson', '1000077381', '$2y$10$Q.AmeHEByhzRaGiyalr/puT5vgj1gaDj7g7W99P2x/YOwPlvzwjuK', '2024-11-02', '3025177000', 3);
 
 --
 -- Índices para tablas volcadas
@@ -64,7 +77,8 @@ INSERT INTO `users` (`id`, `user`, `password`, `date`, `role`) VALUES
 -- Indices de la tabla `transactions`
 --
 ALTER TABLE `transactions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idCliente` (`idCliente`);
 
 --
 -- Indices de la tabla `users`
@@ -80,13 +94,23 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `transactions`
+--
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

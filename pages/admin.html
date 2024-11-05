@@ -5,35 +5,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ProLegal Solution</title>
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" href="/images/justicia.png" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="../images/justicia.png" type="image/x-icon">
 </head>
 
 <body class="admin">
 
   <header>
-    <a href="/pages/login.html"><button>Iniciar sesión</button></a>
+    <a href="../index.html" onclick="cerrarSesion()"><button>Cerrar sesion</button></a>
     <div>
-      <img class='logo' src="/images/justicia.png" />
+      <img class='logo' src="../images/justicia.png" />
       <h5>PLS</h5>
     </div>
   </header>
 
   <section>
-    <a href="/pages/listarCasos.html">
+    <a href="listarCasos.php">
       <button>
-        <img class="logo" src="/images/legal.png">
+        <img class="logo" src="../images/legal.png">
         <h4>Listar casos</h4>
       </button>
     </a>
-    <a href="/pages/listarUsuarios.html">
+    <a href="listarUsuarios.php">
       <button>
-        <img class="logo" src="/images/administrativo.png">
+        <img class="logo" src="../images/administrativo.png">
         <h4>Listar usuarios</h4>
       </button>
     </a>
   </section>
 
 </body>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const userId = urlParams.get('userId');
+
+  if (userId) {
+    localStorage.setItem('userId', userId);
+  }
+
+  const id = localStorage.getItem('userId');
+
+  function cerrarSesion() {
+    localStorage.clear();
+  }
+</script>
 
 </html>

@@ -5,21 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ProLegal Solution</title>
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" href="/images/justicia.png" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="../images/justicia.png" type="image/x-icon">
 </head>
 
 <body>
 
   <header class='header'>
-    <a title="Home" href="/index.html">
-      <img class="icon" src="/images/casa.png">
+    <a title="Home" href="../index.html">
+      <img class="icon" src="../images/casa.png">
     </a>
-    <a title="Perfil" href="/pages/login.html">
-      <img class="icon" src="/images/perfil.png">
+    <a title="Perfil" href="#" onclick="redirectToProfile()">
+      <img class="icon" src="../images/perfil.png">
     </a>
-    <a title="Solicitud" href="/pages/login.html">
-      <img class="icon" src="/images/mensaje.png">
+    <a title="Solicitud" href="#" onclick="redirectToCommit()">
+      <img class="icon" src="../images/mensaje.png">
     </a>
   </header>
 
@@ -48,7 +48,7 @@
         <p><b>4. Desarrollo Inmobiliario:</b> Ofrecemos apoyo legal en proyectos de desarrollo inmobiliario, incluyendo
           la
           obtención de permisos y licencias, y el cumplimiento de normativas locales.</p>
-        <img class="logo" src="/images/casa.png">
+        <img class="logo" src="../images/casa.png">
       </div>
       <div>
         <h4>¿Porque elegirnos?</h4>
@@ -58,13 +58,13 @@
           asegurando una atención personalizada.</p>
         <p><b>Compromiso:</b> Nos comprometemos a proteger sus derechos e intereses, brindándole un apoyo constante
           a lo largo de su proceso legal.</p>
-        <img class="logo" src="/images/administrativo.png">
+        <img class="logo" src="../images/administrativo.png">
       </div>
     </section>
 
     <section class="pago">
       <h3>Costo consulta inicial: 90.000 COP</h3>
-      <a class="stylesDiv" href="/pages/formConsulta.html">
+      <a class="stylesDiv" href="#" onclick="redirectToCommit()">
         <button>Llenar datos consulta</button>
       </a>
     </section>
@@ -93,5 +93,28 @@
   </div>
 
 </body>
+
+<script>
+  const user = localStorage.getItem('username');
+
+  function redirectToProfile() {
+    if (user) {
+      window.location.href = 'perfil.html';
+    } else {
+      window.location.href = 'login.php';
+    }
+  }
+
+  function redirectToCommit() {
+    if (user) {
+      localStorage.setItem('numeroAsesoria', 7);
+      localStorage.setItem('tipoAsesoria', "Inmobiliario");
+      localStorage.setItem('costoAsesoria', 90000);
+      window.location.href = 'formConsulta.html';
+    } else {
+      window.location.href = 'login.php';
+    }
+  }
+</script>
 
 </html>

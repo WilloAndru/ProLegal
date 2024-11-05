@@ -5,45 +5,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ProLegal Solution</title>
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" href="/images/justicia.png" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="../images/justicia.png" type="image/x-icon">
 </head>
 
 <body>
 
   <header class='header'>
-    <a title="Home" href="/index.html">
-      <img class="icon" src="/images/casa.png">
+    <a title="Home" href="../index.html">
+      <img class="icon" src="../images/casa.png">
     </a>
-    <a title="Perfil" href="/pages/login.html">
-      <img class="icon" src="/images/perfil.png">
+    <a title="Perfil" href="login.php">
+      <img class="icon" src="../images/perfil.png">
     </a>
-    <a title="Solicitud" href="/pages/login.html">
-      <img class="icon" src="/images/mensaje.png">
+    <a title="Solicitud" href="login.php">
+      <img class="icon" src="../images/mensaje.png">
     </a>
   </header>
 
-  <form class="body form" action="">
-
+  <form id="consultaForm" action="../php/crearTransaccion.php" method="POST" class="body form">
     <div class="div">
-      <h4>Usted ha escojido la asesoria de tipo penal</h4>
-      <p>Porfavor llene el metodo de pago y la descripcion de su caso</p>
+      <h4 id="asesoria">Usted ha escogido la asesoría de tipo <span id="tipoAsesoria"></span></h4>
+      <p>Por favor llene la descripción de su caso</p>
 
-      <label for="">Descripcion breve de la consulta</label>
-      <textarea name="" id=""></textarea>
+      <label for="descripcion">Descripción breve de la consulta</label>
+      <textarea required name="descripcion" id="descripcion"></textarea>
 
       <div class="div1">
-          <label>Informacion de la tarjeta</label>
-          <input name="cardNumber" className='Input input1' type="text" placeholder='1234 1234 1234 1234' />
-          <input name="expiryDate" type="text" placeholder='MM/AA' />
-          <input name="cvv" className='input2' type="text" placeholder='CVV' />
-          <input name="cardHolderName" className='Input' type="text" placeholder='Nombre completo' />
+        <label>Información de la tarjeta</label>
+        <input name="cardNumber" class="Input input1" type="text" placeholder="1234 1234 1234 1234" />
+        <input name="expiryDate" type="text" placeholder="MM/AA" />
+        <input name="cvv" class="input2" type="text" placeholder="CVV" />
+        <input name="cardHolderName" class="Input" type="text" placeholder="Nombre completo" />
+        <input type="hidden" name="userId" id="userIdInput" value="">
+        <input type="hidden" name="numeroAsesoria" id="numeroAsesoriaInput" value="">
       </div>
 
       <label>Costo consulta inicial</label>
-      <h4>80.000 COP</h4>
+      <h4 id="costo"><span id="costoAsesoria"></span></h4>
 
-      <a class="stylesDiv" href="/index.html"><button>Enviar consulta</button></a>
+      <button type="submit">Enviar consulta</button>
     </div>
 
     <footer>
@@ -57,17 +58,52 @@
         <h3>Redes Sociales</h3>
         <p>YouTube</p>
         <p>Instagram</p>
-        <p>Linkedln</p>
+        <p>LinkedIn</p>
       </div>
       <div>
-        <h3>Informacion</h3>
+        <h3>Información</h3>
         <p>pls@prolegalsolution.com</p>
         <p>+57 321 577 6599</p>
-        <p>Bogota, Colombia</p>
+        <p>Bogotá, Colombia</p>
       </div>
     </footer>
-
   </form>
+
+  <script>
+    const tipoAsesoria = localStorage.getItem('tipoAsesoria') || "General";
+    const numeroAsesoria = localStorage.getItem('numeroAsesoria') || 1;
+    const costoAsesoria = localStorage.getItem('costoAsesoria') || "50.000";
+    const idUser = localStorage.getItem('userId');
+    document.getElementById('tipoAsesoria').textContent = tipoAsesoria;
+    document.getElementById('costoAsesoria').textContent = `${costoAsesoria} COP`;
+    document.getElementById('userIdInput').value = idUser || "";
+    document.getElementById('numeroAsesoriaInput').value = numeroAsesoria || 1;
+
+    document.getElementById("consultaForm").addEventListener("submit", function(event) {
+
+      const cardFields = document.querySelectorAll('input[name="cardNumber"], input[name="expiryDate"], input[name="cvv"], input[name="cardHolderName"]');
+      cardFields.forEach(field => field.removeAttribute('name'));
+
+      const tipoAsesoriaInput = document.createElement("input");
+      tipoAsesoriaInput.type = "hidden";
+      tipoAsesoriaInput.name = "tipoAsesoria";
+      tipoAsesoriaInput.value = tipoAsesoria;
+      this.appendChild(tipoAsesoriaInput);
+
+      const costoAsesoriaInput = document.createElement("input");
+      costoAsesoriaInput.type = "hidden";
+      costoAsesoriaInput.name = "costoAsesoria";
+      costoAsesoriaInput.value = costoAsesoria;
+      this.appendChild(costoAsesoriaInput);
+
+      this.submit();
+
+      cardFields[0].setAttribute('name', 'cardNumber');
+      cardFields[1].setAttribute('name', 'expiryDate');
+      cardFields[2].setAttribute('name', 'cvv');
+      cardFields[3].setAttribute('name', 'cardHolderName');
+    });
+  </script>
 
 </body>
 

@@ -14,10 +14,10 @@
     <a title="Home" href="index.html">
       <img class="icon" src="images/casa.png">
     </a>
-    <a title="Perfil" href="pages/login.html">
+    <a title="Perfil" href="#" onclick="redirectToProfile()">
       <img class="icon" src="images/perfil.png">
     </a>
-    <a title="Solicitud" href="pages/login.html">
+    <a title="Solicitud" href="#" onclick="redirectToCommit()">
       <img class="icon" src="images/mensaje.png">
     </a>
   </header>
@@ -25,7 +25,7 @@
   <section class="home body">
 
     <header>
-      <a href="/pages/login.html"><button>Iniciar sesión</button></a>
+      <div id="user-section"></div>
       <div>
         <img class='logo' src="images/justicia.png" />
         <h5>PLS</h5>
@@ -53,18 +53,20 @@
       <div class='div'>
         <div>
           <h3>Mision</h3>
-          <p>Nuestra misión es ofrecer asesoría legal de excelencia, defendiendo los derechos e intereses de nuestros clientes con integridad, profesionalismo y un compromiso inquebrantable hacia la justicia.</p>
+          <p>Nuestra misión es ofrecer asesoría legal de excelencia, defendiendo los derechos e intereses de nuestros
+            clientes con integridad, profesionalismo y un compromiso inquebrantable hacia la justicia.</p>
         </div>
         <div>
           <h3>Vision</h3>
-          <p>Nuestra visión es ser un bufete de abogados líder en el sector, reconocido por nuestra excelencia en el servicio y nuestro firme compromiso con la justicia, ofreciendo soluciones legales innovadoras.</p>
+          <p>Nuestra visión es ser un bufete de abogados líder en el sector, reconocido por nuestra excelencia en el
+            servicio y nuestro firme compromiso con la justicia, ofreciendo soluciones legales innovadoras.</p>
         </div>
       </div>
     </div>
 
     <div class="divHome3">
       <h1>Nuestros servicios</h1>
-  
+
       <div>
         <a href="pages/legalGeneral.html">
           <button class="stylesDiv">
@@ -72,49 +74,49 @@
             <h4>Asesoría Legal General</h4>
           </button>
         </a>
-  
+
         <a href="pages/empresarial.html">
           <button class="stylesDiv">
             <img class="logo" src="images/empresa.png">
             <h4>Derecho Corporativo y Empresarial</h4>
           </button>
         </a>
-  
+
         <a href="pages/civil.html">
           <button class="stylesDiv">
             <img class="logo" src="images/civil.png">
             <h4>Derecho Civil</h4>
           </button>
         </a>
-  
+
         <a href="pages/penal.html">
           <button class="stylesDiv">
             <img class="logo" src="images/penal.png">
             <h4>Derecho Penal</h4>
           </button>
         </a>
-  
+
         <a href="pages/laboral.html">
           <button class="stylesDiv">
             <img class="logo" src="images/laboral.png">
             <h4>Derecho Laboral</h4>
           </button>
         </a>
-  
+
         <a href="pages/familiar.html">
           <button class="stylesDiv">
             <img class="logo" src="images/familia.png">
             <h4>Derecho Familiar</h4>
           </button>
         </a>
-  
+
         <a href="pages/inmobiliario.html">
           <button class="stylesDiv">
             <img class="logo" src="images/casa.png">
             <h4>Derecho Inmobiliario</h4>
           </button>
         </a>
-  
+
         <a href="pages/administrativo.html">
           <button class="stylesDiv">
             <img class="logo" src="images/administrativo.png">
@@ -126,9 +128,9 @@
 
     <div class="divHome4">
       <h2>Comentarios de nuestros clientes</h2>
-  
+
       <div class="div">
-  
+
         <div class="div1">
           <div>
             <img class="icon" src="images/marta.png">
@@ -136,7 +138,7 @@
           </div>
           <p>Excelente servicio legal, resolvieron mi caso de manera rápida y efectiva.</p>
         </div>
-  
+
         <div class="div1">
           <div>
             <img class="icon" src="images/carlos.png">
@@ -145,7 +147,7 @@
           <p>Gracias a la orientación clara y profesional del equipo legal, pude resolver mi caso rápidamente. Su apoyo
             fue invaluable en todo momento.</p>
         </div>
-  
+
         <div class="div1">
           <div>
             <img class="icon" src="images/nino.png">
@@ -154,7 +156,7 @@
           <p>Recibí un trato excelente y una asesoría precisa que me ayudó a entender todos los aspectos legales de mi
             situación.</p>
         </div>
-  
+
         <div class="div1">
           <div>
             <img class="icon" src="images/sofia.png">
@@ -163,7 +165,7 @@
           <p>La atención personalizada y el conocimiento profundo del equipo legal me brindaron la confianza que
             necesitaba para enfrentar mi caso.</p>
         </div>
-  
+
       </div>
     </div>
 
@@ -189,6 +191,61 @@
     </footer>
 
   </section>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    const username = urlParams.get('username');
+    const telefono = urlParams.get('telefono');
+    const identificacion = urlParams.get('identificacion');
+    const fechaNacimiento = urlParams.get('fechaNacimineto');
+
+    if (urlParams.get('success') === 'consulta_enviada') {
+      alert('Mensaje enviado con éxito');
+    }
+
+    if (userId) {
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('username', username);
+      localStorage.setItem('telefono', telefono);
+      localStorage.setItem('identificacion', identificacion);
+      localStorage.setItem('fechaNacimiento', fechaNacimiento);
+    }
+
+    const storedUsername = localStorage.getItem('username');
+    const userSection = document.getElementById('user-section');
+
+    if (storedUsername) {
+      userSection.innerHTML = `
+                <p>
+                    <a href="pages/perfil.html"><button>Bienvenido, ${storedUsername}</button></a>
+                </p>
+            `;
+    } else {
+      userSection.innerHTML = `
+                <a href="pages/login.php"><button>Iniciar sesión</button></a>
+            `;
+    }
+
+    function redirectToProfile() {
+      if (storedUsername) {
+        window.location.href = 'pages/perfil.html';
+      } else {
+        window.location.href = 'pages/login.php';
+      }
+    }
+
+    function redirectToCommit() {
+      if (storedUsername) {
+        localStorage.setItem('numeroAsesoria', 1);
+        localStorage.setItem('tipoAsesoria', "General");
+        localStorage.setItem('costoAsesoria', 50000);
+        window.location.href = 'pages/formConsulta.html';
+      } else {
+        window.location.href = 'pages/login.php';
+      }
+    }
+  </script>
 
 </body>
 
