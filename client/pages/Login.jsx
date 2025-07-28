@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const URL = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -13,12 +13,12 @@ function Login() {
     cellphone: "",
     date: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem('isChangePassword', false);
+    localStorage.setItem("isChangePassword", false);
     setIsChangePassword(false);
   }, []);
 
@@ -42,7 +42,7 @@ function Login() {
   };
 
   const changeToForgot = () => {
-    localStorage.setItem('isChangePassword', true);
+    localStorage.setItem("isChangePassword", true);
     setIsChangePassword(true);
     setisLogin(false);
   };
@@ -55,19 +55,24 @@ function Login() {
     const endpoint = isChangePassword
       ? `${URL}/editData`
       : isLogin
-        ? `${URL}/login`
-        : `${URL}/register`;
+      ? `${URL}/login`
+      : `${URL}/register`;
 
     const { confirmPassword, ...dataToSend } = formData;
     const data = isChangePassword
-      ? { username: formData.username, nameData: "contraseña", value: formData.password, cellphone: formData.cellphone }
+      ? {
+          username: formData.username,
+          nameData: "contraseña",
+          value: formData.password,
+          cellphone: formData.cellphone,
+        }
       : isLogin
-        ? { username: formData.username, password: formData.password }
-        : dataToSend;
+      ? { username: formData.username, password: formData.password }
+      : dataToSend;
 
     try {
       const response = await axios.post(endpoint, data);
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem("token", response.data.token);
       navigate("/");
     } catch (error) {
       seterror(error.response?.data?.message || "Ocurrió un error");
@@ -80,13 +85,13 @@ function Login() {
 
       <form onSubmit={handleSubmit}>
         <div>
-          <img className="icon" src="/mensaje.png" alt="Icono de mensaje" />
+          <img className="icon" src="mensaje.png" alt="Icono de mensaje" />
           <h4>
             {isChangePassword
               ? "Restaurar contraseña"
               : isLogin
-                ? "Iniciar sesión"
-                : "Registro"}
+              ? "Iniciar sesión"
+              : "Registro"}
           </h4>
         </div>
 
@@ -116,7 +121,7 @@ function Login() {
           </div>
         )}
 
-        {(!isLogin && !isChangePassword) && (
+        {!isLogin && !isChangePassword && (
           <div className="div1">
             <label htmlFor="date">Fecha de nacimiento</label>
             <input
@@ -160,8 +165,8 @@ function Login() {
           {isChangePassword
             ? "Restaurar contraseña"
             : isLogin
-              ? "Entrar"
-              : "Registrarse"}
+            ? "Entrar"
+            : "Registrarse"}
         </button>
 
         {!isChangePassword && (
@@ -173,7 +178,9 @@ function Login() {
 
       {!isChangePassword && (
         <div className="div2">
-          <h5>{isLogin ? "¿No tienes una cuenta?" : "¿Ya tienes una cuenta?"}</h5>
+          <h5>
+            {isLogin ? "¿No tienes una cuenta?" : "¿Ya tienes una cuenta?"}
+          </h5>
           <button onClick={() => setisLogin(!isLogin)} type="button">
             {isLogin ? "Regístrate aquí" : "Iniciar sesión"}
           </button>
